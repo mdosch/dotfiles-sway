@@ -1,7 +1,7 @@
 {
-    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": ["clock", "idle_inhibitor"],
-    "modules-right": ["tray", "pulseaudio", "temperature", "battery", "custom/power"],
+    "modules-right": ["tray", "network", "pulseaudio", "cpu", "memory", "temperature", "battery", "custom/power"],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -10,7 +10,7 @@
         "format-ethernet": "{ifname} ",
         "format-disconnected": "", 
         "max-length": 50,
-        "on-click": "kitty -e 'nmtui'"
+        "on-click": "lxterminal -e 'nmtui'"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -24,16 +24,19 @@
         "spacing": 10
     },
     "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+    	"format": "{:%Y-%m-%d %H:%M}",
+        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        // "format-alt": "{:%Y-%m-%d}",
+		//"on-click": "gnome-calendar"
+		"on-click": "lxterminal -e ikhal"
     },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% "
-    },
+     "cpu": {
+         "format": "{usage}% ",
+         "tooltip": false
+     },
+     "memory": {
+         "format": "{}% "
+     },
     "temperature": {
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "critical-threshold": 82,
@@ -73,20 +76,28 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    },
-
-	"custom/power": {
-		"format": "",
-		"on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
-	}
+    // "custom/media": {
+    //     "format": "{icon} {}",
+    //     "return-type": "json",
+    //     "max-length": 40,
+    //     "format-icons": {
+    //         "spotify": "",
+    //         "default": "🎜"
+    //     },
+    //     "escape": true,
+    //     "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    // },
+	// "custom/power": {
+	// 	"format": "",
+	// 	"on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+	// },
+	// "custom/example_runscript_3 seconds": {
+	// 	"interval": 3,
+	// 	"exec": "/home/dg/.config/waybar/modules/menu_test.py",
+	// 	"format": "{}",
+	// },
+	"custom/menu": {
+		"format": "",
+	 	"on-click": "/home/dg/.config/waybar/modules/menu_test.py",
+	},
 }
